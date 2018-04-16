@@ -18,4 +18,8 @@ public class IndexController {
         return "/index";
     }
 
+    @RequestMapping(value = "/about")
+    public String about() {
+        return "about";
+    }
 }

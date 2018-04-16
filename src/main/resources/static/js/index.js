@@ -76,7 +76,7 @@ $(function () {
         data: [{
             id: 'home',
             text: '主页',
-            url: "tab_first.html",
+            url: "about",
             closeable: false
         }],
         showIndex: 0, // 显示的页面下标
@@ -102,11 +102,12 @@ var PageContent = {
                 break
             }
         }
+
         if (tabExist) {
-            $("#tabContainer").data("tabs").showTab(url);
+            $("#tabContainer").data("tabs").showTab(name);
         } else {
             $("#tabContainer").data("tabs").addTab({
-                id: url,
+                id: name,
                 url: url,
                 text: name,
                 closeable: true
