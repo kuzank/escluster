@@ -1,6 +1,7 @@
 package com.kuzank.escluster.common.interceptor;
 
 import com.kuzank.escluster.common.bean.AppAuth;
+import com.kuzank.escluster.common.bean.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
@@ -25,31 +27,24 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
-        // 1 验证登录
-//        HttpSession session = request.getSession();
-//        if (session == null || session.getAttribute(Constants.USER_SESSION_KEY) == null) {
-//
-//            logger.info("user not logged in");
-//            response.sendRedirect(Constants.LOGIN_VIEW);
-//            return false;
-//        }
-//        logger.debug("user already logged in");
-
-        // Authorization test:
-        //Credential credential = (Credential) session.getAttribute(Constants.USER_SESSION_KEY);
-
-
-        // 2 获取请求方法上的注解，判断用户是否有权限
+        HttpSession session = request.getSession();
+        // 获取请求方法上的注解，判断用户是否有权限
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
         Annotation[] annotations = method.getAnnotations();
 
         AppAuth appAuthAnnotation = method.getDeclaredAnnotation(AppAuth.class);
         if (appAuthAnnotation == null) {
-            
+            return true;
         }
 
+        if (session == null || session.getAttribute(Constants.USER_SESSION_KEY) == null) {
+            logger.info("user not logged in");
+            response.sendRedirect(Constants.LOGIN_VIEW);
+            return false;
+        }
 
+        logger.debug("user already logged in");
         return true;
     }
 

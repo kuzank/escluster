@@ -1,16 +1,79 @@
-<!--
- * <p>Description: </p> 
- *
- * @author kuzan
- * @since  2018-04-16
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"></meta>
     <title>部署安装</title>
+    <!-- 部署安装 CSS -->
+    <link rel="stylesheet" href="../static/css/install.css"></link>
 </head>
 <body>
-部署安装
+<div>
+    部署安装
+    <form id="installdata" class="form-horizontal">
+        <div id="legend-connect" class="">
+            <legend class="" style="padding-left: 50px">远程主机连接信息</legend>
+        </div>
+        <div class="form-group">
+            <label for="_host" class="col-sm-1 control-label">主机IP</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="_host" name="_host" placeholder="请输入主机IP"></input>
+            </div>
+            <label for="_username" class="col-sm-1 control-label">用户名</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="_username" name="_username" placeholder="请输入用户名"></input>
+            </div>
+            <label for="_password" class="col-sm-1 control-label">密码</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="_password" name="_password" placeholder="请输入密码"></input>
+            </div>
+        </div>
+        <div class="">
+            <legend class="" style="padding-left: 50px">ElasticSearch 节点部署配置</legend>
+        </div>
+
+        <div class="form-group">
+            <label for="_nodeName" class="col-sm-2 control-label">节点名称</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="_nodeName" name="_nodeName" placeholder="请输入节点名称"></input>
+            </div>
+            <label for="_memory" class="col-sm-2 control-label">最大内存</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="_memory" name="_memory" placeholder="请输入最大内存"></input>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="_nodeMaster" class="col-sm-2 control-label">成为主节点</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="_nodeMaster" name="_nodeMaster"
+                       placeholder="是否成为成为主节点"></input>
+            </div>
+            <label for="_noteData" class="col-sm-2 control-label">存储数据</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="_noteData" name="_noteData" placeholder="是否存储数据"></input>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="_tcpPort" class="col-sm-2 control-label">TCP端口</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="_tcpPort" name="_tcpPort" placeholder="请输入TCP端口"></input>
+            </div>
+            <label for="_httpPort" class="col-sm-2 control-label">HTTP端口</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="_httpPort" name="_httpPort" placeholder="请输入HTTP端口"></input>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-12">
+                <button class="btn btn-default" onclick="sublimeData()">一键部署ElasticSearch节点</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- ALL JS -->
+<!-- 部署安装 JS -->
+<script src="../static/js/install.js"></script>
 </body>
 </html>

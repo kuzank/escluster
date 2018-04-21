@@ -10,11 +10,10 @@ public class Constants {
 
     // VIEW
     public static final String LOGIN_VIEW = "/login";
-    public static final String INDEX_VIEW = "/index";
+    public static final String HOME_VIEW = "/home";
 
     public static final String NOTFOUND_VIEW = "/error/404";
     public static final String SERVERERROR_VIEW = "/error/500";
-
 
 
 

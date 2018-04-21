@@ -4,37 +4,6 @@
  * @author kuzan
  * @since  2018-04-11
  */
-//
-// $(function () {
-//
-//     $("#tabContainer").tabs({
-//         data: [{
-//             id: 'home',
-//             text: '百度一下',
-//             url: "tab_first.html",
-//             closeable: true
-//         }, {
-//             id: 'admineap',
-//             text: 'AdminEAP',
-//             url: "tab_second.html"
-//         }, {
-//             id: 'edit',
-//             text: '编辑人员',
-//             url: "tab_content.html",
-//             closeable: true
-//         }],
-//         showIndex: 1,
-//         loadAll: false
-//     })
-//
-//     $("#tabContainer").data("tabs").addTab({
-//         id: 'test',
-//         text: 'addTab',
-//         closeable: true,
-//         url: 'tab_content.html'
-//     })
-//
-// });
 
 $("#menu-toggle").click(function (e) {
     e.preventDefault();
@@ -66,11 +35,7 @@ function initMenu() {
             }
         }
     );
-}
 
-$(function () {
-
-    initMenu();
 
     $("#tabContainer").tabs({
         data: [{
@@ -82,19 +47,28 @@ $(function () {
         showIndex: 0, // 显示的页面下标
         loadAll: false
     })
+}
 
+$(function () {
 
+    initMenu();
 });
 
+
+/**
+ * 封装 tab 页面的功能
+ * @type {{addPageTab: PageContent.addPageTab}}
+ */
 var PageContent = {
 
-    addPageTab: function (url, name) {
+    addPageTab: function (id, url, name) {
 
         var tabExist = false;
         var tabExistIndex;
         var tabLength = $("#myTab li").length;
 
         for (var i = 0; i < tabLength; i++) {
+
             var tabName = $("#myTab li a span")[i].innerText;
             if ($.trim(name) == $.trim(tabName)) {
                 tabExist = true;
@@ -104,15 +78,15 @@ var PageContent = {
         }
 
         if (tabExist) {
-            $("#tabContainer").data("tabs").showTab(name);
+            $("#tabContainer").data("tabs").showTab(id);
         } else {
+            console.log($("#tabContainer").data("tabs"))
             $("#tabContainer").data("tabs").addTab({
-                id: name,
-                url: url,
+                id: id,
                 text: name,
+                url: url,
                 closeable: true
             })
         }
     }
-
 }

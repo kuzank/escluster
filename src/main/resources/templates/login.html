@@ -1,0 +1,50 @@
+<!--
+ * <p>Description: </p> 
+ *
+ * @author kuzan
+ * @since  2018-04-21
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>login</title>
+    <meta charset="UTF-8"></meta>
+    <link rel="stylesheet" href="../static/plugin/bootstrap/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="../static/plugin/font-awesome/css/font-awesome.min.css"></link>
+    <link rel="stylesheet" href="../static/plugin/toastr/build/toastr.min.css"></link>
+    <link rel="stylesheet" href="../static/css/login.css"></link>
+</head>
+<body>
+<div class="container">
+    <div class="form row">
+        <div class="form-horizontal col-md-offset-3" id="login_form">
+            <h3 class="form-title">ElasticSearch 云服务平台</h3>
+            <div class="col-md-9">
+                <div class="form-group">
+                    <i class="fa fa-user fa-lg"></i>
+                    <input class="form-control required" type="text" placeholder="请输入账号" id="account"
+                           name="username" autofocus="autofocus" maxlength="20"></input>
+                </div>
+                <div class="form-group">
+                    <i class="fa fa-lock fa-lg"></i>
+                    <input class="form-control required" type="password" placeholder="请输入密码" id="password"
+                           name="password" maxlength="8"></input>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox">
+                        <input type="checkbox" name="remember" value="1"></input>记住我
+                    </label>
+                </div>
+                <div class="form-group col-md-offset-9">
+                    <button type="submit" class="btn btn-success pull-right" onclick="sublimeLogin()">登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../static/plugin/jquery/jquery-1.8.3.min.js"></script>
+<script src="../static/plugin/bootstrap/js/bootstrap.min.js"></script>
+<script src="../static/plugin/toastr/build/toastr.min.js"></script>
+<script src="../static/js/login.js"></script>
+</body>
+</html>

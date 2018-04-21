@@ -8,8 +8,9 @@
 <html lang="zh-CN">
 <head>
     <title>首页</title>
-    <link rel="stylesheet" href="../static/plugin/bootstrap-3.3.7/css/bootstrap.min.css"></link>
-    <link rel="stylesheet" href="../static/plugin/bootstrap-3.3.7/css/bootstrap-tab.css"></link>
+    <meta charset="UTF-8"></meta>
+    <link rel="stylesheet" href="../static/plugin/bootstrap/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="../static/plugin/bootstrap/css/bootstrap-tab.css"></link>
     <link rel="stylesheet" href="../static/plugin/font-awesome/css/font-awesome.min.css"></link>
     <!-- 首页 CSS -->
     <link rel="stylesheet" href="../static/css/index.css"></link>
@@ -17,7 +18,7 @@
 
 <body>
 <!-- 前端html页面的 header -->
-<nav class="navbar navbar-default no-margin">
+<nav class="navbar navbar-default no-margin" style="margin: 0">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header fixed-brand">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
@@ -35,7 +36,6 @@
             </li>
         </ul>
     </div>
-    <!-- bs-example-navbar-collapse-1 -->
 </nav>
 <div id="wrapper">
     <!-- 左边功能区 -->
@@ -47,14 +47,15 @@
                         <i class="fa fa-envira fa-stack-1x "></i></span>
                     集群部署</a>
                 <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                    <li><a href="#" onclick="PageContent.addPageTab('install/index','部署安装')">
+                    <li><a href="#" onclick="PageContent.addPageTab('install','install/index','部署安装')">
                             <span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i>
                             </span>部署安装</a>
                     </li>
-                    <li><a href="#" onclick="PageContent.addPageTab('operation/index','启动和停止')">
+                    <li><a href="#" onclick="PageContent.addPageTab('operation','operation/index','启动和停止')">
                             <span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i>
                             </span>启动和停止</a>
                     </li>
+
                 </ul>
             </li>
             <li>
@@ -64,15 +65,15 @@
                     数据库
                 </a>
                 <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                    <li><a href="#" onclick="PageContent.addPageTab('install/index','部署安装')">
+                    <li><a href="#" onclick="PageContent.addPageTab('install','install/index','部署安装')">
                             <span class="fa-stack fa-lg pull-left"><i class="fa fa-database fa-stack-1x "></i>
                             </span>数据库总览</a>
                     </li>
-                    <li><a href="#" onclick="PageContent.addPageTab('install/index','部署安装')">
+                    <li><a href="#" onclick="PageContent.addPageTab('install','install/index','部署安装')">
                             <span class="fa-stack fa-lg pull-left"><i class="fa fa-database fa-stack-1x "></i>
                             </span>索引总览</a>
                     </li>
-                    <li><a href="#" onclick="PageContent.addPageTab('install/index','部署安装')">
+                    <li><a href="#" onclick="PageContent.addPageTab('install','install/index','部署安装')">
                             <span class="fa-stack fa-lg pull-left"><i class="fa fa-database fa-stack-1x "></i>
                             </span>自定义结构</a>
                     </li>
@@ -85,11 +86,11 @@
                     数据接口服务
                 </a>
                 <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                    <li><a href="#" onclick="PageContent.addPageTab('install/index','部署安装')">
+                    <li><a href="#" onclick="PageContent.addPageTab('install','install/index','部署安装')">
                             <span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i>
                             </span>接口调用</a>
                     </li>
-                    <li><a href="#" onclick="PageContent.addPageTab('install/index','部署安装')">
+                    <li><a href="#" onclick="PageContent.addPageTab('install','install/index','部署安装')">
                             <span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i>
                             </span>接口详情</a>
                     </li>
@@ -102,11 +103,11 @@
                     数据导入导出
                 </a>
                 <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                    <li><a href="#" onclick="PageContent.addPageTab('install/index','部署安装')">
+                    <li><a href="#" onclick="PageContent.addPageTab('install','install/index','部署安装')">
                             <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload fa-stack-1x "></i>
                             </span>数据导入</a>
                     </li>
-                    <li><a href="#" onclick="PageContent.addPageTab('install/index','部署安装')">
+                    <li><a href="#" onclick="PageContent.addPageTab('install','install/index','部署安装')">
                             <span class="fa-stack fa-lg pull-left"><i class="fa fa-download fa-stack-1x "></i>
                             </span>数据导出</a>
                     </li>
@@ -128,9 +129,10 @@
     </div>
 </div>
 <!-- ALL JS -->
-<script src="../static/plugin/jquery/jquery-1.10.2.min.js"></script>
-<script src="../static/plugin/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-<script src="../static/plugin/bootstrap-3.3.7/js/bootstrap-tab.js"></script>
+<!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+<script src="../static/plugin/jquery/jquery-1.8.3.min.js"></script>
+<script src="../static/plugin/bootstrap/js/bootstrap-tab.js"></script>
+<script src="../static/plugin/bootstrap/js/bootstrap.min.js"></script>
 <!-- 首页 JS -->
 <script src="../static/js/index.js"></script>
 </body>
