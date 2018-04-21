@@ -1,7 +1,7 @@
 package com.kuzank.escluster.util;
 
 import com.jcraft.jsch.*;
-import com.kuzank.escluster.mapper.entity.LinuxConnEntity;
+import com.kuzank.escluster.entity.LinuxConnEntity;
 
 import java.io.IOException;
 import java.io.InputStream;

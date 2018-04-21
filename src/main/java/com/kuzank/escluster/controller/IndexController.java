@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IndexController {
 
 
-    @RequestMapping(value = {"/", "/index", "/home", "/root"})
+    @RequestMapping(value = {"/", "/index", "/home"})
     @AppAuth(role = AuthEnum.Observation)
     public String index() {
         return "index";

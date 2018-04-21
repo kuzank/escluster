@@ -31,10 +31,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         // 获取请求方法上的注解，判断用户是否有权限
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
-        Annotation[] annotations = method.getAnnotations();
 
-        AppAuth appAuthAnnotation = method.getDeclaredAnnotation(AppAuth.class);
-        if (appAuthAnnotation == null) {
+        AppAuth priorityAuth = null;
+
+        AppAuth authAnnoOfMethod = method.getDeclaredAnnotation(AppAuth.class);
+        AppAuth authAnnoOfClazz = handlerMethod.getBean().getClass().getAnnotation(AppAuth.class);
+
+        if (authAnnoOfMethod != null) {
+            priorityAuth = authAnnoOfMethod;
+        } else if (authAnnoOfClazz != null) {
+            priorityAuth = authAnnoOfClazz;
+        } else {
             return true;
         }
 

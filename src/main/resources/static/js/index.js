@@ -52,6 +52,7 @@ function initMenu() {
 $(function () {
 
     initMenu();
+
 });
 
 
@@ -80,7 +81,6 @@ var PageContent = {
         if (tabExist) {
             $("#tabContainer").data("tabs").showTab(id);
         } else {
-            console.log($("#tabContainer").data("tabs"))
             $("#tabContainer").data("tabs").addTab({
                 id: id,
                 text: name,

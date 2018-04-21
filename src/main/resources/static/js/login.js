@@ -47,13 +47,13 @@ function sublimeLogin() {
             },
 
             success: function (data) {
-                debugger
+
                 switch (data.status) {
                     case 200:
                         toastr.info('操作成功','info')
                         window.location.href = '/index';
                         break;
-                    case 405:
+                    case 305:
                         toastr.error('登陆失败，密码错误或用户名错误', 'error')
                         break;
                 }

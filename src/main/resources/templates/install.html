@@ -8,9 +8,8 @@
 </head>
 <body>
 <div>
-    部署安装
     <form id="installdata" class="form-horizontal">
-        <div id="legend-connect" class="">
+        <div id="legend-connect" style="padding-top: 30px">
             <legend class="" style="padding-left: 50px">远程主机连接信息</legend>
         </div>
         <div class="form-group">
@@ -27,7 +26,7 @@
                 <input type="text" class="form-control" id="_password" name="_password" placeholder="请输入密码"></input>
             </div>
         </div>
-        <div class="">
+        <div class="" style="padding-top: 30px">
             <legend class="" style="padding-left: 50px">ElasticSearch 节点部署配置</legend>
         </div>
 
@@ -39,6 +38,9 @@
             <label for="_memory" class="col-sm-2 control-label">最大内存</label>
             <div class="col-sm-3">
                 <input type="text" class="form-control" id="_memory" name="_memory" placeholder="请输入最大内存"></input>
+            </div>
+            <div class="col-sm-1">
+                <button type="button" class="btn pull-right" onclick="get_memory()">查看服务器内存</button>
             </div>
         </div>
 
@@ -67,7 +69,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-12">
-                <button class="btn btn-default" onclick="sublimeData()">一键部署ElasticSearch节点</button>
+                <button type="button" class="btn btn-default" onclick="sublimeData()">一键部署ElasticSearch节点</button>
             </div>
         </div>
     </form>

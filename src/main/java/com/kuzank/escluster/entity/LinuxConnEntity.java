@@ -1,5 +1,6 @@
-package com.kuzank.escluster.mapper.entity;
+package com.kuzank.escluster.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -12,14 +13,15 @@ import lombok.ToString;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(callSuper = true)
-public class LinuxConnEntity extends BaseEntity {
+public class LinuxConnEntity {
 
-    private static final long serialVersionUID = -6455905628615377123L;
+    public static final int defaultPort = 22;
 
-    private String username;
-    private String password;
     private String host;
     private int port;
+    private String username;
+    private String password;
 
 }
