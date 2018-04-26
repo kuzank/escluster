@@ -1,10 +1,13 @@
 package com.kuzank.escluster.util;
 
 import com.jcraft.jsch.*;
+import com.kuzank.escluster.common.bean.OperateStatus;
 import com.kuzank.escluster.entity.LinuxConnEntity;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author kuzan
@@ -83,6 +86,72 @@ public class SSHUtil {
         } finally {
             channelSftp.quit();
             channelSftp.disconnect();
+        }
+    }
+
+    public static boolean hasDir(Session session, String dirName) {
+        ChannelSftp channelSftp = SSHUtil.getChannelSftp(session);
+        try {
+            channelSftp.cd(dirName);
+            return true;
+        } catch (SftpException sException) {
+            return false;
+        }
+    }
+
+    /**
+     * @return 通过 shell 的 which 来判断远程主机是否有命令 command
+     */
+    public static boolean hasCommand(Session session, String command) {
+        //要验证的字符串
+        String result = SSHUtil.executeCommand(session, "which " + command);
+        // 正则表达式规则
+        String regEx = ".*" + command + ".*";
+        // 编译正则表达式 ,忽略大小写的写法
+        Pattern pattern = Pattern.compile(regEx, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(result);
+        // 查找字符串中是否有匹配正则表达式的字符/字符串
+        boolean b = matcher.find();
+        return b;
+    }
+
+    /**
+     * @return 判断远程主机是否安装 lsof 命令，再根据 lsof 命令判断端口是否被占用
+     */
+    public static boolean isPortInUse(Session session, String port) {
+
+        if (!hasCommand(session, "lsof")) {
+            if (hasCommand(session, "yum")) {
+                SSHUtil.executeCommand(session, "yum -y install lsof > /dev/null 2>&1");
+            } else
+                SSHUtil.executeCommand(session, "apt-get -y install lsof > /dev/null 2>&1");
+        }
+
+        String result = SSHUtil.executeCommand(session, "lsof -i:" + port);
+
+        for (byte b : result.getBytes())
+            if (b != 0)
+                return true;
+        return false;
+    }
+
+    /**
+     * 判断远程主机是否可以连接
+     */
+    public static OperateStatus isLinuxConnected(LinuxConnEntity connEntity) {
+
+        // 验证参数信息
+        if (CheckUtil.NotEmpty(connEntity.getHost(), connEntity.getUsername(), connEntity.getPassword()) != OperateStatus.SUCCESS) {
+            return OperateStatus.PARAM_EMPTY;
+        }
+
+        Session session = SSHUtil.getSession(connEntity);
+
+        if (session.isConnected()) {
+            return OperateStatus.SUCCESS;
+        } else {
+            session.disconnect();
+            return OperateStatus.LINUX_CANT_CONNECT;
         }
     }
 

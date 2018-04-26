@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * <p>Description: </p>
  *
@@ -23,6 +25,9 @@ public interface AppMapper extends BaseMapper<AppMapper> {
             "(null, #{appEntity.deleted}, #{appEntity.clusterName}, ${appEntity.createdBy} ,now() ,#{appEntity.description})")
     int insert(@Param("appEntity") AppEntity appEntity);
 
-    @Select("select * from " + COLLECTION + " where clusterName=#{clusterName} and deleted = 'false'")
-    AppEntity findByClusterName(@Param("clusterName") String clusterName);
+    @Select("SELECT * FROM " + COLLECTION + " WHERE clusterName=#{clusterName} AND deleted = 'false'")
+    List<AppEntity> findByClusterName(@Param("clusterName") String clusterName);
+
+    @Select("SELECT * FROM " + COLLECTION + " a WHERE a.createdBy = ${userid} AND a.deleted = 'false'")
+    List<AppEntity> findByUserId(@Param("userid") int userid);
 }

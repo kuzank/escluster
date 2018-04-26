@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 /**
  * <p>Description: </p>
  *
@@ -50,7 +52,8 @@ public class AppMapperTest {
     @Rollback
     public void findByClusterName() {
 
-        AppEntity appEntity = appMapper.findByClusterName("app one");
+        List<AppEntity> appEntity = appMapper.findByClusterName("app one");
+
         System.out.println("result : " + appEntity);
     }
 

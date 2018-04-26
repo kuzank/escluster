@@ -17,22 +17,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IndexController {
 
 
-    @RequestMapping(value = {"/", "/index", "/home"})
+    @RequestMapping(value = {"/", "/index", "/home"}, method = {RequestMethod.GET, RequestMethod.POST})
     @AppAuth(role = AuthEnum.Observation)
     public String index() {
         return "index";
     }
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public String login() {
         return "login";
-    }
-
-
-    @RequestMapping(value = "/about")
-    public String about() {
-        return "about";
     }
 
 

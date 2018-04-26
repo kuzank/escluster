@@ -41,7 +41,7 @@ function initMenu() {
         data: [{
             id: 'home',
             text: '主页',
-            url: "about",
+            url: "/app/about",
             closeable: false
         }],
         showIndex: 0, // 显示的页面下标

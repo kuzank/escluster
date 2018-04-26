@@ -12,6 +12,7 @@ $(function () {
 function sublimeData() {
 
     var obj = $('#installdata').serialize();
+    debugger
     $.ajax({
         url: "/install/execute",
         type: 'POST',
@@ -36,7 +37,6 @@ function get_memory() {
     var _password = $('#_password').val();
 
     if (_host != null && _host != "" && _username != null && _username != "" && _password != null && _password != "") {
-        debugger
         $.ajax({
             url: "/install/getMemory",
             type: 'POST',
@@ -48,7 +48,6 @@ function get_memory() {
             },
 
             success: function (data) {
-                debugger
                 switch (data.status) {
                     case 200:
                         layer.msg('远程主机的可用内存大小 : ' + data.data, {icon: 0, shift: 6});
@@ -68,7 +67,6 @@ function get_memory() {
                 console.log(msg)
             }
         });
-
     } else {
         layer.msg('请填写完整远程主机的连接信息', {icon: 0, shift: 6});
     }

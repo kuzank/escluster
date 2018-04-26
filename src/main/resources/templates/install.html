@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"></meta>
     <title>部署安装</title>
@@ -23,7 +23,7 @@
             </div>
             <label for="_password" class="col-sm-1 control-label">密码</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="_password" name="_password" placeholder="请输入密码"></input>
+                <input type="password" class="form-control" id="_password" name="_password" placeholder="请输入密码"></input>
             </div>
         </div>
         <div class="" style="padding-top: 30px">
@@ -45,17 +45,24 @@
         </div>
 
         <div class="form-group">
-            <label for="_nodeMaster" class="col-sm-2 control-label">成为主节点</label>
+            <label class="col-sm-2 control-label">成为主节点</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="_nodeMaster" name="_nodeMaster"
-                       placeholder="是否成为成为主节点"></input>
-            </div>
-            <label for="_noteData" class="col-sm-2 control-label">存储数据</label>
+                <label class="radio-inline">
+                    <input type="radio" name="_nodeMaster" id="_nodeMaster_yes" value="option1" checked="checked">
+                    是</input>
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="_nodeMaster" id="_nodeMaster_no" value="option2"> 否</input>
+                </label></div>
+            <label class="col-sm-2 control-label">存储数据</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="_noteData" name="_noteData" placeholder="是否存储数据"></input>
-            </div>
+                <label class="radio-inline">
+                    <input type="radio" name="_noteData" id="_noteData_yes" value="option1" checked="checked"> 是</input>
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="_noteData" id="_noteData_no" value="option2"> 否</input>
+                </label></div>
         </div>
-
         <div class="form-group">
             <label for="_tcpPort" class="col-sm-2 control-label">TCP端口</label>
             <div class="col-sm-3">

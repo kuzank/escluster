@@ -16,7 +16,7 @@ import java.io.*;
 @Controller
 public class ExcelController {
 
-    @RequestMapping(value = "/excel")
+    @RequestMapping(value = "/excel",method = {RequestMethod.GET, RequestMethod.POST})
     public String test() {
         return "/excel";
     }
