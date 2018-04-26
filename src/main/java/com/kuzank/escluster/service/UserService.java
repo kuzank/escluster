@@ -16,9 +16,9 @@ public interface UserService {
 
     public void deleteUser(int userId) throws Exception;
 
-    public UserEntity getUserById(int userId) throws Exception;
+    public UserEntity findUserById(int userId) throws Exception;
 
-    public UserEntity getUserByAccount(String account) throws Exception;
+    public UserEntity findUserByAccount(String account) throws Exception;
 
     boolean validateUserByAccount(String account, String password) throws OperateException;
 

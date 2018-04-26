@@ -51,14 +51,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity getUserById(int id) throws Exception {
+    public UserEntity findUserById(int id) throws Exception {
 
         return userMapper.findById(String.valueOf(id));
     }
 
 
     @Override
-    public UserEntity getUserByAccount(String account) throws OperateException {
+    public UserEntity findUserByAccount(String account) throws OperateException {
         checkNotNull(account, OperateStatus.NULL_OF_ACCOUNT);
 
         return userMapper.findByAccount(account);

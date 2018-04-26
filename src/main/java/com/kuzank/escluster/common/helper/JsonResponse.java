@@ -6,7 +6,8 @@ import com.kuzank.escluster.common.bean.OperateStatus;
  * <p>Description: </p>
  */
 public class JsonResponse {
-    public static final JsonResponse OK = new JsonResponse(OperateStatus.SUCCESS);
+    public static final JsonResponse SUCCESS = new JsonResponse(OperateStatus.SUCCESS);
+    public static final JsonResponse FALSE = new JsonResponse(OperateStatus.FALSE);
     private int status;
     private String message;
     private Object data;

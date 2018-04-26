@@ -16,7 +16,7 @@ public enum OperateStatus {
     LOGIN_FAIL(305, "登陆失败，密码错误或用户名错误"),
 
     PARAM_EMPTY(320, "参数信息不全，请求填写完整所有参数信息"),
-    PARAM_NO_ALLOW(321, "参数中包含非法字符"),
+    PARAM_NO_ALLOW(321, "参数命名不合法"),
 
     LINUX_CANT_CONNECT(411, "连接信息出错,无法连接远程服务器"),
     LINUX_GET_MEMORY_ERROE(412, "连接远程服务器成功,但无法获取服务器内存信息"),

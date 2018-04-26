@@ -93,7 +93,7 @@ public class InstallController {
 //        map.put("result", "true");
 //        map.put("msg", "Install Elasticsearch In /usr/elasticsearch/es" + tcpPort + " Successfully.");
 
-        return JsonResponse.OK;
+        return JsonResponse.SUCCESS;
     }
 
     @RequestMapping(value = "/getMemory", method = RequestMethod.POST, produces = {"application/json"})
