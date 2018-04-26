@@ -9,7 +9,6 @@ $(function () {
 function sublimeData() {
 
     var obj = $('#installdata').serialize();
-    debugger
     $.ajax({
         url: "/install/execute",
         type: 'POST',

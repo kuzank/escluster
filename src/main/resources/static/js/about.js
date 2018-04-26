@@ -1,4 +1,6 @@
-
+/**
+ * <p>Description: </p>
+ */
 
 $(function () {
 
@@ -7,7 +9,6 @@ $(function () {
         type: 'POST',
 
         success: function (data) {
-            debugger
             switch (data.status) {
                 case 200:
                     $('#msg').text("系统已创建集群应用 : " + data.data);

@@ -4,11 +4,9 @@
 
 $("#menu-toggle").click(function (e) {
     e.preventDefault();
-    debugger
     $("#wrapper").toggleClass("toggled");
 });
 $("#menu-toggle-2").click(function (e) {
-    debugger
     e.preventDefault();
     $("#wrapper").toggleClass("toggled-2");
     //$('#menu ul').hide();
