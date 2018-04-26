@@ -12,8 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 /**
- * @author kuzan
- * @since 2018-01-28
+ * <p>Description: </p>
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

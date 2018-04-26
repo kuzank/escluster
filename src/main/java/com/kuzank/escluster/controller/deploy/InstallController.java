@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * <p>Description: 部署安装 ElasticSearch 应用的 Controller</p>
- *
- * @author kuzan
- * @since 2018-04-16
  */
 @Controller
 @AppAuth(role = AuthEnum.Observation)

@@ -8,9 +8,6 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since 2018-04-15
  */
 @Mapper
 public interface ESNodeMapper extends BaseMapper<ESNodeEntity> {

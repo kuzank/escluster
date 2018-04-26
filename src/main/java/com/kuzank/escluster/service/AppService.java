@@ -4,6 +4,9 @@ import com.kuzank.escluster.mapper.entity.AppEntity;
 
 import java.util.List;
 
+/**
+ * <p>Description: </p>
+ */
 public interface AppService {
 
     public int insert(AppEntity appEntity) throws Exception;

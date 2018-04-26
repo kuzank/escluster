@@ -15,9 +15,6 @@ import java.util.List;
 
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since 2018-04-15
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

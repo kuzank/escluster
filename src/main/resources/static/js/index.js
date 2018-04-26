@@ -1,8 +1,5 @@
 /**
  * <p>Description: 首页的 JavaScript</p>
- *
- * @author kuzan
- * @since  2018-04-11
  */
 
 $("#menu-toggle").click(function (e) {

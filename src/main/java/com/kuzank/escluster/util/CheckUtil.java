@@ -3,6 +3,9 @@ package com.kuzank.escluster.util;
 import com.kuzank.escluster.common.bean.OperateStatus;
 import org.springframework.util.ObjectUtils;
 
+/**
+ * <p>Description: </p>
+ */
 public class CheckUtil {
 
     public static OperateStatus NotEmpty(Object object) {

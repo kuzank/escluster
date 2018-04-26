@@ -6,9 +6,6 @@ import org.springframework.util.ObjectUtils;
 
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since 2018-04-15
  */
 public class Preconditions {
     public static void checkArgument(boolean expression, OperateStatus status, String message) throws OperateException {

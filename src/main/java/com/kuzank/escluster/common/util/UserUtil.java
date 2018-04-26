@@ -6,8 +6,7 @@ import org.apache.log4j.MDC;
 import java.util.Locale;
 
 /**
- * @author kuzan
- * @since 2018/01/28
+ * <p>Description: </p>
  */
 public class UserUtil {
 

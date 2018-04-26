@@ -4,9 +4,6 @@ import com.kuzank.escluster.common.bean.OperateStatus;
 
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since 2018-04-15
  */
 public class OperateException extends Exception {
 

@@ -1,8 +1,7 @@
 package com.kuzank.escluster.common.exception;
 
 /**
- * @author kuzan
- * @since 2018/01/28
+ * <p>Description: </p>
  */
 public class CheckException extends RuntimeException {
 

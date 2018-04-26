@@ -9,9 +9,6 @@ import com.kuzank.escluster.common.exception.ESClusterException;
  * --    AppAdmin 应用管理员，在 CRUD 的基础上为本应用添加用户
  * --    SysAdmin 系统管理员，在 AppAdministrator 的基础上添加对 AppAdministrator 用户的管理功能(增、删、禁用)
  * </p>
- *
- * @author kuzan
- * @since 2018-04-15
  */
 public enum AuthEnum {
 

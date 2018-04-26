@@ -5,9 +5,6 @@ import com.kuzank.escluster.mapper.entity.UserEntity;
 
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since 2018-04-15
  */
 public interface UserService {
 

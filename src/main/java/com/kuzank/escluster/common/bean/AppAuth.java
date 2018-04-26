@@ -3,8 +3,7 @@ package com.kuzank.escluster.common.bean;
 import java.lang.annotation.*;
 
 /**
- * @author kuzan
- * @since 2018/01/28
+ * <p>Description: </p>
  */
 @Documented
 @Target({ElementType.METHOD, ElementType.TYPE})

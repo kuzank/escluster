@@ -5,8 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author kuzan
- * @since 2018/01/28
+ * <p>Description: </p>
  */
 @Data
 public class ResultBean<T> implements Serializable {

@@ -10,8 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author kuzan
- * @since 2018/01/28
+ * <p>Description: </p>
  */
 public class SSHUtil {
 

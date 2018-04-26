@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @author kuzan
- * @since 2018/01/21
+ * <p>Description: </p>
  */
 @Controller
 public class IndexController {

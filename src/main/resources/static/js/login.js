@@ -1,8 +1,5 @@
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since  2018-04-21
  */
 
 $(function () {
@@ -50,7 +47,7 @@ function sublimeLogin() {
 
                 switch (data.status) {
                     case 200:
-                        toastr.info('操作成功','info')
+                        toastr.info('操作成功', 'info')
                         window.location.href = '/index';
                         break;
                     case 305:

@@ -2,9 +2,6 @@ package com.kuzank.escluster.common.bean;
 
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since 2018-04-15
  */
 public enum OperateStatus {
 

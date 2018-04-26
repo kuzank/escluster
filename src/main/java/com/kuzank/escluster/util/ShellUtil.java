@@ -5,8 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author kuzan
- * @since 2018/01/28
+ * <p>Description: </p>
  */
 public class ShellUtil {
     // 执行Linux shell命令,执行完命令可将shell执行子线程destroy

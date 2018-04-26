@@ -1,19 +1,10 @@
 package com.kuzank.escluster.common.aop;
 
-import com.kuzank.escluster.common.bean.ResultBean;
-import com.kuzank.escluster.common.exception.CheckException;
-import com.kuzank.escluster.common.exception.UnloginException;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author kuzan
- * @since 2018/01/28
+ * <p>Description: </p>
  */
 @Aspect   //定义一个切面
 @Configuration

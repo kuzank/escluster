@@ -7,9 +7,6 @@ import lombok.ToString;
 
 /**
  * <p>Description: 保存 部署安装 前端请求的数据</p>
- *
- * @author kuzan
- * @since 2018-04-18
  */
 @Data
 @NoArgsConstructor

@@ -10,13 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 
 /**
- * @author kuzan
- * @since 2018/01/28
+ * <p>Description: </p>
  */
 @Controller
 public class ExcelController {
 
-    @RequestMapping(value = "/excel",method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/excel", method = {RequestMethod.GET, RequestMethod.POST})
     public String test() {
         return "/excel";
     }

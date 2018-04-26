@@ -16,9 +16,6 @@ import java.util.Map;
 
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since 2018-04-16
  */
 @Controller
 @AppAuth(role = AuthEnum.Observation)

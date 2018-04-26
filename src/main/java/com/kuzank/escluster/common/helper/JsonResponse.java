@@ -3,7 +3,7 @@ package com.kuzank.escluster.common.helper;
 import com.kuzank.escluster.common.bean.OperateStatus;
 
 /**
- * Created by Rogers on 15-6-11.
+ * <p>Description: </p>
  */
 public class JsonResponse {
     public static final JsonResponse OK = new JsonResponse(OperateStatus.SUCCESS);

@@ -18,9 +18,6 @@ import java.io.IOException;
 
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since 2018-04-15
  */
 @Controller
 @RequestMapping("/user")

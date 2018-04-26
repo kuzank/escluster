@@ -1,8 +1,5 @@
 /**
  * <p>Description: 部署安装 JS</p>
- *
- * @author kuzan
- * @since  2018-04-18
  */
 
 $(function () {

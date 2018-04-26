@@ -9,9 +9,6 @@ import java.util.Date;
 
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since 2018-04-15
  */
 @Data
 @AllArgsConstructor

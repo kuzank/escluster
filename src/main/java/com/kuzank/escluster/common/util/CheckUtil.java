@@ -4,8 +4,7 @@ import com.kuzank.escluster.common.exception.CheckException;
 import org.springframework.context.MessageSource;
 
 /**
- * @author kuzan
- * @since 2018/01/28
+ * <p>Description: </p>
  */
 public class CheckUtil {
     private static MessageSource resources;

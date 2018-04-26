@@ -12,9 +12,6 @@ import static com.kuzank.escluster.common.helper.Preconditions.checkNotNull;
 
 /**
  * <p>Description: </p>
- *
- * @author kuzan
- * @since 2018-04-15
  */
 @Service
 public class UserServiceImpl implements UserService {
