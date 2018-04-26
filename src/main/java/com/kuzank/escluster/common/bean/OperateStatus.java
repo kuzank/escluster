@@ -17,11 +17,14 @@ public enum OperateStatus {
 
     PARAM_EMPTY(320, "参数信息不全，请求填写完整所有参数信息"),
     PARAM_NO_ALLOW(321, "参数命名不合法"),
+    CLUSTER_NAME_EMPTY(330, "系统未创建集群应用"),
+    CLUSTER_NAME_NO_ALLOW(331, "集群应用命名不合法"),
 
     LINUX_CANT_CONNECT(411, "连接信息出错,无法连接远程服务器"),
     LINUX_GET_MEMORY_ERROE(412, "连接远程服务器成功,但无法获取服务器内存信息"),
     LINUX_HTTP_PORT_INUSE(420, "远程主机的 http 端口本占用，请选择其他端口"),
     LINUX_TCP_PORT_INUSE(421, "远程主机的 tcp 端口被占用，请选择其他端口"),
+    LINUX_DIR_USED(423, "远程主机的目录被占用"),
 
     SYSTEM_ERROR(500, "系统内部错误"),
 
