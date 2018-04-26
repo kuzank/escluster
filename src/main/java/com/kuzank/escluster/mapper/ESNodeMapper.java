@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * <p>Description: </p>
  */
@@ -21,8 +23,12 @@ public interface ESNodeMapper extends BaseMapper<ESNodeEntity> {
     int insert(@Param("node") ESNodeEntity node);
 
 
-    @Select("SELECT * FROM " + COLLECTION + " WHERE beloneAppId = ${beloneAppId} and nodeName = #{nodeName} and deleted = 'false'")
-    ESNodeEntity findByBeloneAppIdAndNodeName(@Param("beloneAppId") String beloneAppId, @Param("nodeName") String nodeName);
+    @Select("SELECT * FROM " + COLLECTION + " WHERE beloneAppId = ${beloneAppId} AND nodeName = #{nodeName} AND deleted = 'false'")
+    List<ESNodeEntity> findByNodeName(@Param("beloneAppId") int beloneAppId, @Param("nodeName") String nodeName);
 
+    @Select("SELECT * FROM " + COLLECTION + " WHERE beloneAppId = ${beloneAppId} AND host = #{host} AND tcpPort = #{tcpPort}")
+    List<ESNodeEntity> findByPortAndTcpPort(@Param("beloneAppId") int beloneAppId,
+                                            @Param("host") String host,
+                                            @Param("tcpPort") String tcpPort);
 
 }

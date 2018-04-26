@@ -16,7 +16,6 @@ public class ESNodeEntity extends BaseEntity {
 
     private String beloneAppId;   // 属于哪一个应用
 
-    private String clusterName;
     private String nodeName;
     private String master;
     private String data;

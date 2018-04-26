@@ -8,8 +8,10 @@ import com.kuzank.escluster.common.bean.OperateStatus;
 import com.kuzank.escluster.common.helper.JsonResponse;
 import com.kuzank.escluster.entity.LinuxConnEntity;
 import com.kuzank.escluster.mapper.entity.AppEntity;
+import com.kuzank.escluster.mapper.entity.ESNodeEntity;
 import com.kuzank.escluster.mapper.entity.UserEntity;
 import com.kuzank.escluster.service.AppService;
+import com.kuzank.escluster.service.ESNodeService;
 import com.kuzank.escluster.util.CheckUtil;
 import com.kuzank.escluster.util.SSHUtil;
 import org.apache.log4j.Logger;
@@ -33,6 +35,8 @@ public class InstallController {
 
     @Autowired
     private AppService appService;
+    @Autowired
+    private ESNodeService esNodeService;
 
     private final String ES_NAME = "elasticsearch-5.4.3";
     private final String ES_TMP_Path = "/tmp/" + ES_NAME;
@@ -69,19 +73,38 @@ public class InstallController {
         if (clusterName == null || clusterName.length() == 0 || "null".equals(clusterName)) {
             return new JsonResponse(OperateStatus.CLUSTER_NAME_EMPTY);
         }
+        // 验证 ElasticSearch 参数
+        if (CheckUtil.NotEmpty(_nodeMaster, _nodeMaster, _noteData, _memory, _tcpPort, _httpPort) != OperateStatus.SUCCESS)
+            return new JsonResponse(OperateStatus.PARAM_EMPTY);
+
+        // 判断是否存在相同节点名字
+        List<ESNodeEntity> esNodeEntities = esNodeService.findByNodeName(appEntitys.get(0).getId(), _nodeName);
+        if (esNodeEntities != null && esNodeEntities.size() > 0) {
+            return new JsonResponse(OperateStatus.CLUSTER_CONTAIN_SAME_NODENAME);
+        }
+
+        // 判断是否存在相同 host && tcpPort
+        esNodeEntities = esNodeService.findByHostAndTcpPort(appEntitys.get(0).getId(), _host, _tcpPort);
+        if (esNodeEntities != null && esNodeEntities.size() > 0) {
+            return new JsonResponse(OperateStatus.CLUSTER_CONTAIN_SAME_IP_TCPPORT);
+        }
+
+        // 验证远程主机参数信息
+        if (CheckUtil.NotEmpty(_host, _username, _password) != OperateStatus.SUCCESS) {
+            return new JsonResponse(OperateStatus.PARAM_EMPTY);
+        }
 
         LinuxConnEntity linuxConnEntity = new LinuxConnEntity(_host, LinuxConnEntity.defaultPort, _username, _password);
+        Session session = SSHUtil.getSession(linuxConnEntity);
+        if (!session.isConnected()) {
+            return new JsonResponse(OperateStatus.LINUX_CANT_CONNECT);
+        }
 
         // 验证是否可以连接远程主机
         OperateStatus checkStatus = SSHUtil.isLinuxConnected(linuxConnEntity);
         if (checkStatus != OperateStatus.SUCCESS) {
             return new JsonResponse(checkStatus);
         }
-        // 验证 ElasticSearch 参数
-        if (CheckUtil.NotEmpty(_nodeMaster, _nodeMaster, _noteData, _memory, _tcpPort, _httpPort) != OperateStatus.SUCCESS)
-            return new JsonResponse(OperateStatus.PARAM_EMPTY);
-
-        Session session = SSHUtil.getSession(linuxConnEntity);
 
         // 判断 tcpPort 是否被占用
         if (SSHUtil.isPortInUse(session, _tcpPort)) {
@@ -97,17 +120,17 @@ public class InstallController {
         }
 
         // 将 ElasticSearch 压缩文件传送到远程 Linux 上并解压到 /tmp 目录下
-//        SSHUtil.sendDir(session, TarPath, "/tmp");
-//        SSHUtil.executeCommand(session, "tar -zxf " + ES_TMP_Path + ".tar.gz -C /tmp");
+        SSHUtil.sendDir(session, TarPath, "/tmp");
+        SSHUtil.executeCommand(session, "tar -zxf " + ES_TMP_Path + ".tar.gz -C /tmp");
 
         // 安装和配置 ElasticSearch 运行参数
-//        SSHUtil.executeCommand(session, "chmod a+x " + ES_Install_Shell_Path);
-//        SSHUtil.executeCommand(session, ES_Install_Shell_Path + " " + ES_TMP_Path + " " + clusterName + " "
-//                + _nodeName + " " + _tcpPort + " " + _httpPort + " " + _memory + " " + httpEnabled + " " + nodeMaster + " " + noteData + " " + host);
+        SSHUtil.executeCommand(session, "chmod a+x " + ES_Install_Shell_Path);
+        SSHUtil.executeCommand(session, ES_Install_Shell_Path + " " + ES_TMP_Path + " " + clusterName + " "
+                + _nodeName + " " + _tcpPort + " " + _httpPort + " " + _memory + " yes " + _nodeMaster + " " + _noteData + " " + _host);
 
         // 删除临时文件
-//        SSHUtil.executeCommand(session, "rm -f " + ES_TMP_DIR + ".tar.gz");
-//        SSHUtil.executeCommand(session, "rm -rf " + ES_TMP_DIR);
+//        SSHUtil.executeCommand(session, "rm -f " + ES_TMP_Path + ".tar.gz");
+//        SSHUtil.executeCommand(session, "rm -rf " + ES_TMP_Path);
 
         // 将节点信息写入xml文件
 //        ESNote esNote = new ESNote(nodeName, host, httpPort, tcpPort, httpEnabled, nodeMaster, noteData, "");

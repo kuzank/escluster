@@ -31,7 +31,6 @@ public class ESNodeMapperTest {
         node.setCreatedBy(1);
         node.setDeleted(Boolean.FALSE.toString());
 
-        node.setClusterName("elasticsearch");
         node.setNodeName("cluster");
         node.setMaster(String.valueOf(true));
         node.setData(String.valueOf(true));
@@ -51,7 +50,7 @@ public class ESNodeMapperTest {
     @Rollback
     public void findByBeloneAppIdAndNodeName() {
 
-        ESNodeEntity esNodeEntity = esNodeMapper.findByBeloneAppIdAndNodeName("0", "cluster");
+        List<ESNodeEntity> esNodeEntity = esNodeMapper.findByNodeName(0, "cluster");
         System.out.println(esNodeEntity);
     }
 

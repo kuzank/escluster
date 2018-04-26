@@ -51,29 +51,29 @@
             <label class="col-sm-2 control-label">成为主节点</label>
             <div class="col-sm-3">
                 <label class="radio-inline">
-                    <input type="radio" name="_nodeMaster" id="_nodeMaster_yes" value="option1" checked="checked">
+                    <input type="radio" name="_nodeMaster" id="_nodeMaster_yes" value="true" checked="checked">
                     是</input>
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="_nodeMaster" id="_nodeMaster_no" value="option2"> 否</input>
+                    <input type="radio" name="_nodeMaster" id="_nodeMaster_no" value="false"> 否</input>
                 </label></div>
             <label class="col-sm-2 control-label">存储数据</label>
             <div class="col-sm-3">
                 <label class="radio-inline">
-                    <input type="radio" name="_noteData" id="_noteData_yes" value="option1" checked="checked"> 是</input>
+                    <input type="radio" name="_noteData" id="_noteData_yes" value="true" checked="checked"> 是</input>
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="_noteData" id="_noteData_no" value="option2"> 否</input>
+                    <input type="radio" name="_noteData" id="_noteData_no" value="false"> 否</input>
                 </label></div>
         </div>
         <div class="form-group">
             <label for="_tcpPort" class="col-sm-2 control-label">TCP端口</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="_tcpPort" name="_tcpPort" placeholder="请输入TCP端口"></input>
+                <input type="number" class="form-control" id="_tcpPort" name="_tcpPort" placeholder="请输入TCP端口"></input>
             </div>
             <label for="_httpPort" class="col-sm-2 control-label">HTTP端口</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="_httpPort" name="_httpPort" placeholder="请输入HTTP端口"></input>
+                <input type="number" class="form-control" id="_httpPort" name="_httpPort" placeholder="请输入HTTP端口"></input>
             </div>
         </div>
 

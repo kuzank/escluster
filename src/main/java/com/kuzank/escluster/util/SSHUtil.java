@@ -88,6 +88,9 @@ public class SSHUtil {
         }
     }
 
+    /**
+     * 判断文件夹是否存在
+     */
     public static boolean hasDir(Session session, String dirName) {
         ChannelSftp channelSftp = SSHUtil.getChannelSftp(session);
         try {
@@ -99,7 +102,7 @@ public class SSHUtil {
     }
 
     /**
-     * @return 通过 shell 的 which 来判断远程主机是否有命令 command
+     * 通过 shell 的 which 来判断远程主机是否有命令 command
      */
     public static boolean hasCommand(Session session, String command) {
         //要验证的字符串
@@ -115,7 +118,7 @@ public class SSHUtil {
     }
 
     /**
-     * @return 判断远程主机是否安装 lsof 命令，再根据 lsof 命令判断端口是否被占用
+     * 判断远程主机是否安装 lsof 命令，再根据 lsof 命令判断端口是否被占用
      */
     public static boolean isPortInUse(Session session, String port) {
 
