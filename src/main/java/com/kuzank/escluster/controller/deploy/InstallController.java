@@ -6,9 +6,11 @@ import com.kuzank.escluster.common.bean.AuthEnum;
 import com.kuzank.escluster.common.bean.OperateStatus;
 import com.kuzank.escluster.common.helper.JsonResponse;
 import com.kuzank.escluster.entity.LinuxConnEntity;
+import com.kuzank.escluster.service.AppService;
 import com.kuzank.escluster.util.CheckUtil;
 import com.kuzank.escluster.util.SSHUtil;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @AppAuth(role = AuthEnum.Observation)
 @RequestMapping("/install")
 public class InstallController {
+
+    @Autowired
+    private AppService appService;
 
     private final String ES_NAME = "elasticsearch-5.4.3";
     private final String ES_TMP_DIR = "/tmp/elasticsearch-5.4.3";

@@ -17,12 +17,11 @@ function sublimeData() {
 
         success: function (data) {
             debugger
-            alert(data)
+            console.log(data)
         },
 
         error: function (er) {
-            alert(er)
-            BackErr(er);
+            console.log(er)
         }
     });
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <p>Description: </p>
@@ -34,6 +34,20 @@ public class AppController {
         return "about";
     }
 
+    @RequestMapping(value = "/info", method = {RequestMethod.GET, RequestMethod.POST}, produces = {"application/json"})
+    @ResponseBody
+    public JsonResponse info(HttpServletRequest request) throws Exception {
+
+        UserEntity userEntity = (UserEntity) request.getSession().getAttribute(Constants.USER_SESSION_KEY);
+        List<AppEntity> appEntitys = appService.findByUserId(userEntity.getId());
+        if (appEntitys != null && appEntitys.size() > 0) {
+            AppEntity entity = appEntitys.get(0);
+            return new JsonResponse(OperateStatus.SUCCESS, entity.getClusterName());
+        }
+
+        return JsonResponse.FALSE;
+    }
+
     @RequestMapping(value = "/insert", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public JsonResponse insert(@RequestParam String clusterName, @RequestParam String description, HttpServletRequest request) throws Exception {
@@ -41,18 +55,18 @@ public class AppController {
         if (clusterName == null || clusterName.length() == 0 || !clusterName.contains(" "))
             return new JsonResponse(OperateStatus.PARAM_NO_ALLOW);
 
-        HttpSession session = request.getSession();
-        UserEntity userEntity = (UserEntity) session.getAttribute(Constants.USER_SESSION_KEY);
+        UserEntity userEntity = (UserEntity) request.getSession().getAttribute(Constants.USER_SESSION_KEY);
 
         AppEntity appEntity = new AppEntity();
         appEntity.setClusterName(clusterName);
         appEntity.setDescription(description);
         appEntity.setCreatedBy(userEntity.getId());
 
-        if (appService.insert(appEntity) == 1) {
-            return JsonResponse.SUCCESS;
+        if (appService.insert(appEntity) == 0) {
+            return JsonResponse.FALSE;
         }
         return JsonResponse.SUCCESS;
     }
+
 
 }
