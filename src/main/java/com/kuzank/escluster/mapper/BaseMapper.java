@@ -31,6 +31,10 @@ public interface BaseMapper<T> {
     int executeBySql(@Param("_sql") String _sql);
 
 
+    @Select("SELECT * FROM #{collection} WHERE id = ${id} AND deleted = 'false'")
+    T findById(@Param("id") int id, @Param("collection") String collection);
+
+
     @Update("update ${paramMap.collection} set ${paramMap." + Field_Name + "} = ${paramMap." + Field_Value + "} where id=${paramMap.id}")
     int updateByMapInt(@Param("paramMap") HashMap<String, String> paramMap);
 

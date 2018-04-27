@@ -13,6 +13,10 @@ public interface ESNodeService {
 
     public String getUnicastHost(int beloneAppId) throws Exception;
 
+    public ESNodeEntity findById(int id) throws Exception;
+
+    public List<ESNodeEntity> findByBeloneAppId(int beloneAppId) throws Exception;
+
     public List<ESNodeEntity> findByNodeName(int beloneAppId, String nodeName) throws Exception;
 
     public List<ESNodeEntity> findByHostAndTcpPort(int beloneAppId, String host, String tcpPort) throws Exception;

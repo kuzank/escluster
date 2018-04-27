@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
         checkNotNull(oldPassword, OperateStatus.NULL_OF_OLD_PASSWORD);
         checkNotNull(newPassword, OperateStatus.NULL_OF_PASSWORD);
 
-        UserEntity userEntity = userMapper.findById(String.valueOf(id));
+        UserEntity userEntity = userMapper.findById(id, UserMapper.COLLECTION);
 
         if (userEntity == null && oldPassword.equals(userEntity.getPassword())) {
             userMapper.updatePassword(String.valueOf(id), newPassword);
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity findUserById(int id) throws Exception {
 
-        return userMapper.findById(String.valueOf(id));
+        return userMapper.findById(id, UserMapper.COLLECTION);
     }
 
 

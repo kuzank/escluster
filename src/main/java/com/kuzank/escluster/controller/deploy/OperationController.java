@@ -3,15 +3,25 @@ package com.kuzank.escluster.controller.deploy;
 import com.jcraft.jsch.Session;
 import com.kuzank.escluster.common.bean.AppAuth;
 import com.kuzank.escluster.common.bean.AuthEnum;
+import com.kuzank.escluster.common.bean.Constants;
+import com.kuzank.escluster.common.bean.OperateStatus;
+import com.kuzank.escluster.common.helper.JsonResponse;
 import com.kuzank.escluster.entity.LinuxConnEntity;
+import com.kuzank.escluster.mapper.entity.ESNodeEntity;
+import com.kuzank.escluster.mapper.entity.UserEntity;
+import com.kuzank.escluster.service.ESNodeService;
+import com.kuzank.escluster.util.CheckUtil;
 import com.kuzank.escluster.util.SSHUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,57 +32,64 @@ import java.util.Map;
 @RequestMapping("/operation")
 public class OperationController {
 
+    @Autowired
+    private ESNodeService esNodeService;
+
     @RequestMapping(value = "/index", method = {RequestMethod.GET, RequestMethod.POST})
     public String index() {
         return "operation";
     }
 
-    @RequestMapping(value = "/start_es_remote", method = RequestMethod.GET)
-    public @ResponseBody
-    Map<String, Object> start_es(@RequestParam String _host, @RequestParam String _username,
-                                 @RequestParam String _password, @RequestParam String _tcpPort) {
-        Map<String, Object> map = new HashMap<String, Object>();
+    @RequestMapping(value = "/info", method = {RequestMethod.GET, RequestMethod.POST}, produces = {"application/json"})
+    @ResponseBody
+    public List<ESNodeEntity> info(HttpServletRequest request) throws Exception {
+
+        UserEntity userEntity = (UserEntity) request.getSession().getAttribute(Constants.USER_SESSION_KEY);
+        List<ESNodeEntity> entityList = esNodeService.findByBeloneAppId(userEntity.getBeloneAppId());
+
+        return entityList;
+    }
+
+    /**
+     * TODO 后续功能 ESNote表中添加一个字段 isConfig，用来判断是否需要写入 unicateHost 信息
+     */
+    @RequestMapping(value = "/start", method = RequestMethod.GET, produces = {"application/json"})
+    @ResponseBody
+    public JsonResponse start(@RequestParam String _host, @RequestParam String _username,
+                              @RequestParam String _password, @RequestParam int id) throws Exception {
+
+        // 验证远程主机参数信息
+        if (CheckUtil.NotEmpty(_host, _username, _password) != OperateStatus.SUCCESS) {
+            return new JsonResponse(OperateStatus.PARAM_EMPTY);
+        }
+
+        // 验证是否可以连接远程主机
         LinuxConnEntity linuxConnEntity = new LinuxConnEntity(_host, LinuxConnEntity.defaultPort, _username, _password);
+        Session session = SSHUtil.getSession(linuxConnEntity);
+        if (!session.isConnected()) {
+            return new JsonResponse(OperateStatus.LINUX_CANT_CONNECT);
+        }
 
-//        String unicastHost = NodesXmlUtil.getUnicastHostsByXml(XMLPATH);
-//
-//        Session session = SSHUtil.getSession(linuxConnEntity);
-
-//        map.put("result", "false");
-//        if (!session.isConnected()) {
-//            map.put("msg", "无法与远端服务器建立连接，请检查服务器IP地址、用户名和密码是否正确！");
-//            return map;
-//        }
-//        if (!NodesXmlUtil.hasUnicast_hosts(XMLPATH, _host, _tcpPort)) {
-//            String command = "echo \'discovery.zen.ping.unicast.hosts: [" + unicastHost + "]\' >> " + "/usr/elasticsearch/es" + tcpPort + "/config/elasticsearch.yml";
-//            SSHUtil.executeCommand(session, command);
-//            boolean setResult = NodesXmlUtil.setUnicast_hosts(XMLPATH, _host, _tcpPort, unicastHost);
-//            if (setResult == false) {
-//                map.put("msg", "将集群节点信息写入配置文件 " + _host + ":" + _tcpPort + " 中出现错误！");
-//                return map;
-//            }
-//        }
-//        String shellPath = "/usr/elasticsearch/es" + _tcpPort + "/shell/run_es.sh";
-//        SSHUtil.executeCommand(session, "chmod a+x " + shellPath);
-//        SSHUtil.executeCommand(session, shellPath + "  " + _tcpPort);
+        // 执行启动
+        ESNodeEntity entity = esNodeService.findById(id);
+        if (entity == null) {
+            return new JsonResponse(OperateStatus.CLUSTER_NODE_NO_EXIST);
+        }
+        String shellPath = "/usr/elasticsearch/es" + entity.getTcpPort() + "/shell/run_es.sh";
+        SSHUtil.executeCommand(session, "chmod a+x " + shellPath);
+        SSHUtil.executeCommand(session, shellPath + "  " + entity.getTcpPort());
 //
 //        boolean isRunning = ElasticsearchUtil.isNodeRunning(XMLPATH, _host, _tcpPort);
-//
-//        if (isRunning == true) {
-//            map.put("msg", "节点 (" + _host + ":" + _tcpPort + ") " + "启动成功！");
-//            map.put("result", "true");
-//        } else {
-//            map.put("msg", "节点 (" + _host + ":" + _tcpPort + ") " + "启动失败！");
-//        }
+
 //        session.disconnect();
-        return map;
+        return JsonResponse.SUCCESS;
     }
 
 
-    @RequestMapping(value = "/stop_es_remote", method = RequestMethod.GET)
+    @RequestMapping(value = "/stop", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> stop_es(@RequestParam String _host, @RequestParam String _username,
-                                @RequestParam String _password, @RequestParam String tcpPort) {
+    Map<String, Object> stop(@RequestParam String _host, @RequestParam String _username,
+                             @RequestParam String _password, @RequestParam String tcpPort) {
 
         Map<String, Object> map = new HashMap<String, Object>();
         LinuxConnEntity linuxConnEntity = new LinuxConnEntity(_host, LinuxConnEntity.defaultPort, _username, _password);

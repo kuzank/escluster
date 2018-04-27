@@ -41,6 +41,17 @@ public class ESNodeServiceImpl implements ESNodeService {
     }
 
     @Override
+    public ESNodeEntity findById(int id) throws Exception {
+        return esNodeMapper.findById(id, ESNodeMapper.COLLECTION);
+    }
+
+    @Override
+    public List<ESNodeEntity> findByBeloneAppId(int beloneAppId) throws Exception {
+
+        return esNodeMapper.findByBeloneAppId(beloneAppId);
+    }
+
+    @Override
     public List<ESNodeEntity> findByNodeName(int beloneAppId, String nodeName) throws Exception {
 
         return esNodeMapper.findByNodeName(beloneAppId, nodeName);

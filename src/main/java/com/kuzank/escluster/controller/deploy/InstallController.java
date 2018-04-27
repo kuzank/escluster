@@ -32,6 +32,7 @@ import java.util.List;
 @AppAuth(role = AuthEnum.Observation)
 @RequestMapping("/install")
 public class InstallController {
+    private static Logger logger = Logger.getLogger(InstallController.class);
 
     @Autowired
     private AppService appService;
@@ -42,13 +43,6 @@ public class InstallController {
     private final String ES_TMP_Path = "/tmp/" + ES_NAME;
     private final String ES_Install_Shell_Path = ES_TMP_Path + "/shell/install_es.sh";
     private final String TarPath = getClass().getClassLoader().getResource("").getPath() + "static/tar/elasticsearch-5.4.3.tar.gz";
-
-    //    private final String XMLPATH = SHELL_DIR + ElasticsearchUtil.XMLNAME;
-    private final String XMLPATH = "";
-
-
-    private static Logger logger = Logger.getLogger(InstallController.class);
-
 
     @RequestMapping(value = "/index", method = {RequestMethod.GET, RequestMethod.POST})
     public String index() {
@@ -94,16 +88,11 @@ public class InstallController {
             return new JsonResponse(OperateStatus.PARAM_EMPTY);
         }
 
+        // 验证是否可以连接远程主机
         LinuxConnEntity linuxConnEntity = new LinuxConnEntity(_host, LinuxConnEntity.defaultPort, _username, _password);
         Session session = SSHUtil.getSession(linuxConnEntity);
         if (!session.isConnected()) {
             return new JsonResponse(OperateStatus.LINUX_CANT_CONNECT);
-        }
-
-        // 验证是否可以连接远程主机
-        OperateStatus checkStatus = SSHUtil.isLinuxConnected(linuxConnEntity);
-        if (checkStatus != OperateStatus.SUCCESS) {
-            return new JsonResponse(checkStatus);
         }
 
         // 判断 tcpPort 是否被占用

@@ -22,6 +22,7 @@ public enum OperateStatus {
     CLUSTER_CONTAIN_SAME_NODENAME(332, "集群中已包含相同名称的节点，请重新命名节点名称"),
     CLUSTER_CONTAIN_SAME_IP_TCPPORT(333, "集群中已包含相同节点，请修改远程主机的地址或者TCP端口"),
     DB_SAVE_ERROR_INSTALL_OK(334, "部署安装节点成功，但是将配置信息写入数据库失败"),
+    CLUSTER_NODE_NO_EXIST(335, "集群节点不存在"),
 
     LINUX_CANT_CONNECT(411, "连接信息出错,无法连接远程服务器"),
     LINUX_GET_MEMORY_ERROE(412, "连接远程服务器成功,但无法获取服务器内存信息"),

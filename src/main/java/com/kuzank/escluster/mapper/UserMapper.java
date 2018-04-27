@@ -20,10 +20,6 @@ public interface UserMapper extends BaseMapper<UserEntity> {
     int insert(@Param("user") UserEntity user);
 
 
-    @Select("select * from " + COLLECTION + " where id=#{id} and deleted = 'false'")
-    UserEntity findById(@Param("id") String id);
-
-
     @Select("select * from " + COLLECTION + " where deleted = 'false' and beloneAppId = ${beloneAppId}")
     List<UserEntity> findAllByBeloneAppId(@Param("beloneAppId") String beloneAppId);
 

@@ -6,9 +6,6 @@
     <groupId>com.kuzank.escluster</groupId>
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <modules>
-        <module>elasticsearch</module>
-    </modules>
     <packaging>pom</packaging>
 
     <name>escluster</name>

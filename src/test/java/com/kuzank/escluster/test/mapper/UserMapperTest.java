@@ -54,7 +54,7 @@ public class UserMapperTest {
     @Rollback
     public void findById() {
 
-        UserEntity userEntity = userMapper.findById("3");
+        UserEntity userEntity = userMapper.findById(3, UserMapper.COLLECTION);
         System.out.println(userEntity);
     }
 
