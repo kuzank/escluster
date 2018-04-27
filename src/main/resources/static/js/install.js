@@ -44,6 +44,9 @@ function sublimeData() {
                 case 423: // 远程主机的目录被占用
                     layer.msg(data.message, {icon: 0, shift: 6});
                     break;
+                case 334: // 部署安装节点成功，但是将配置信息写入数据库失败
+                    layer.msg(data.message, {icon: 0, shift: 6});
+                    break;
             }
             console.log(data);
         },

@@ -16,12 +16,14 @@ public interface ESNodeMapper extends BaseMapper<ESNodeEntity> {
 
     public static final String COLLECTION = "esnode";
 
-    @Insert("INSERT INTO " + COLLECTION + "(id, beloneAppId, deleted, clusterName, nodeName, master, data, " +
+    @Insert("INSERT INTO " + COLLECTION + "(id, beloneAppId, deleted, nodeName, master, data, " +
             "dataDir, host, httpPort, tcpPort, httpEnabled, unicastHost, createdBy, createdAt) " +
-            "VALUES(null, ${node.beloneAppId}, #{node.deleted},#{node.clusterName}, #{node.nodeName}, #{node.master}, #{node.data}, " +
-            "#{node.dataDir}, #{node.host}, #{node.httpPort}, #{node.tcpPort}, #{node.httpEnabled}, #{node.unicastHost}, ${node.createdBy}, now())")
+            "VALUES(null, ${node.beloneAppId}, 'false', #{node.nodeName}, #{node.master}, #{node.data}, " +
+            "#{node.dataDir}, #{node.host}, #{node.httpPort}, #{node.tcpPort}, 'yes', #{node.unicastHost}, ${node.createdBy}, now())")
     int insert(@Param("node") ESNodeEntity node);
 
+    @Select("SELECT * FROM " + COLLECTION + " WHERE beloneAppId = ${beloneAppId} AND deleted = 'false'")
+    List<ESNodeEntity> findByBeloneAppId(@Param("beloneAppId") int beloneAppId);
 
     @Select("SELECT * FROM " + COLLECTION + " WHERE beloneAppId = ${beloneAppId} AND nodeName = #{nodeName} AND deleted = 'false'")
     List<ESNodeEntity> findByNodeName(@Param("beloneAppId") int beloneAppId, @Param("nodeName") String nodeName);

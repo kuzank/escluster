@@ -114,7 +114,7 @@ public class InstallController {
         if (SSHUtil.isPortInUse(session, _httpPort)) {
             return new JsonResponse(OperateStatus.LINUX_HTTP_PORT_INUSE);
         }
-        // 判断远程主机的目录是否存在
+        // TODO 判断远程主机的目录是否存在
         if (SSHUtil.hasDir(session, "")) {
             return new JsonResponse(OperateStatus.LINUX_DIR_USED);
         }
@@ -124,24 +124,41 @@ public class InstallController {
         SSHUtil.executeCommand(session, "tar -zxf " + ES_TMP_Path + ".tar.gz -C /tmp");
 
         // 安装和配置 ElasticSearch 运行参数
+        String unicastHost = getUnicastHost(appEntitys.get(0).getId(), _host, _tcpPort);
         SSHUtil.executeCommand(session, "chmod a+x " + ES_Install_Shell_Path);
-        SSHUtil.executeCommand(session, ES_Install_Shell_Path + " " + ES_TMP_Path + " " + clusterName + " "
-                + _nodeName + " " + _tcpPort + " " + _httpPort + " " + _memory + " yes " + _nodeMaster + " " + _noteData + " " + _host);
+        SSHUtil.executeCommand(session, ES_Install_Shell_Path + " " + ES_TMP_Path + " " + clusterName + " " + _nodeName + " "
+                + _tcpPort + " " + _httpPort + " " + _memory + " " + _nodeMaster + " " + _noteData + " " + _host + " " + unicastHost);
+
+        System.out.println(ES_Install_Shell_Path + " " + ES_TMP_Path + " " + clusterName + " " + _nodeName + " "
+                + _tcpPort + " " + _httpPort + " " + _memory + " " + _nodeMaster + " " + _noteData + " " + _host + " " + unicastHost);
 
         // 删除临时文件
-//        SSHUtil.executeCommand(session, "rm -f " + ES_TMP_Path + ".tar.gz");
+        SSHUtil.executeCommand(session, "rm -f " + ES_TMP_Path + ".tar.gz");
 //        SSHUtil.executeCommand(session, "rm -rf " + ES_TMP_Path);
 
         // 将节点信息写入xml文件
-//        ESNote esNote = new ESNote(nodeName, host, httpPort, tcpPort, httpEnabled, nodeMaster, noteData, "");
-//        NodesXmlUtil.writeNode(XMLPATH, esNote);
+        ESNodeEntity entity = new ESNodeEntity();
+        entity.setBeloneAppId(appEntitys.get(0).getId());
+        entity.setNodeName(_nodeName);
+        entity.setMaster(_nodeMaster);
+        entity.setData(_noteData);
+        entity.setDataDir("/usr/elasticsearch/es" + _tcpPort + "/data");
+        entity.setHost(_host);
+        entity.setTcpPort(_tcpPort);
+        entity.setHttpPort(_httpPort);
+        entity.setUnicastHost(unicastHost);
+        entity.setCreatedBy(userEntity.getId());
+
+        System.out.println(entity);
+
+        int insertResult = esNodeService.insert(entity);
+        if (insertResult != 1)
+            return new JsonResponse(OperateStatus.DB_SAVE_ERROR_INSTALL_OK);
 
         session.disconnect();
-//        map.put("result", "true");
-//        map.put("msg", "Install Elasticsearch In /usr/elasticsearch/es" + tcpPort + " Successfully.");
-
         return JsonResponse.SUCCESS;
     }
+
 
     @RequestMapping(value = "/getMemory", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
@@ -174,4 +191,11 @@ public class InstallController {
         }
     }
 
+    private String getUnicastHost(int beloneAppId, String _host, String _tcpPort) throws Exception {
+
+        String str = esNodeService.getUnicastHost(beloneAppId);
+        return str == null || str.length() == 0 ?
+                "[" + _host + ":" + _tcpPort + "]" :
+                "[" + _host + ":" + _tcpPort + "," + str + "]";
+    }
 }

@@ -27,7 +27,7 @@ public class ESNodeMapperTest {
 
         ESNodeEntity node = new ESNodeEntity();
 
-        node.setBeloneAppId("0");
+        node.setBeloneAppId(0);
         node.setCreatedBy(1);
         node.setDeleted(Boolean.FALSE.toString());
 

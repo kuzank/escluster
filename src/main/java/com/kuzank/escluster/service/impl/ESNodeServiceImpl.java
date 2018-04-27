@@ -25,6 +25,22 @@ public class ESNodeServiceImpl implements ESNodeService {
     }
 
     @Override
+    public String getUnicastHost(int beloneAppId) throws Exception {
+
+        String result = null;
+        List<ESNodeEntity> esNodeEntities = esNodeMapper.findByBeloneAppId(beloneAppId);
+
+        if (esNodeEntities != null && esNodeEntities.size() > 0) {
+            result = esNodeEntities.get(0).getHost() + ":" + esNodeEntities.get(0).getTcpPort();
+            for (int i = 1; i < esNodeEntities.size(); i++) {
+                ESNodeEntity item = esNodeEntities.get(i);
+                result = result + "," + item.getHost() + ":" + item.getTcpPort();
+            }
+        }
+        return result;
+    }
+
+    @Override
     public List<ESNodeEntity> findByNodeName(int beloneAppId, String nodeName) throws Exception {
 
         return esNodeMapper.findByNodeName(beloneAppId, nodeName);

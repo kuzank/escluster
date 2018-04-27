@@ -20,6 +20,6 @@ public class UserEntity extends BaseEntity {
     private String mobile;
     private String email;
 
-    private String beloneAppId;   // 属于哪一个应用
+    private Integer beloneAppId;   // 属于哪一个应用
     private String appAuth;       // 用户在应用中的权限
 }

@@ -27,7 +27,7 @@ public class UserMapperTest {
     public void insert() throws Exception {
 
         UserEntity user = new UserEntity();
-        user.setBeloneAppId("0");
+        user.setBeloneAppId(0);
         user.setDeleted(Boolean.FALSE.toString());
 
         user.setName("kuzank");
@@ -106,7 +106,7 @@ public class UserMapperTest {
 
         UserEntity user = new UserEntity();
         user.setId(4);
-        user.setBeloneAppId("0");
+        user.setBeloneAppId(0);
 
         user.setName("kuzank");
         user.setAppAuth("SysAdmin");

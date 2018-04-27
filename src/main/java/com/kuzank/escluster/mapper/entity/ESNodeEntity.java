@@ -14,7 +14,7 @@ public class ESNodeEntity extends BaseEntity {
 
     private static final long serialVersionUID = -6455905628615377123L;
 
-    private String beloneAppId;   // 属于哪一个应用
+    private Integer beloneAppId;   // 属于哪一个应用
 
     private String nodeName;
     private String master;
